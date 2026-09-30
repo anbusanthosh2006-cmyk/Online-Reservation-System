@@ -11,6 +11,7 @@ public class Database {
         String url = "jdbc:sqlite:reservation.db";
 
         try {
+
             Connection con = DriverManager.getConnection(url);
 
             Statement stmt = con.createStatement();
@@ -41,11 +42,14 @@ public class Database {
                 "source TEXT NOT NULL," +
                 "destination TEXT NOT NULL)"
             );
+
+            // Add default user
             stmt.executeUpdate(
-            	    "INSERT OR IGNORE INTO users (username, password) " +
-            	    "VALUES ('admin', '1234')"
-            	);
-         // Add sample trains
+                "INSERT OR IGNORE INTO users (username, password) " +
+                "VALUES ('admin', '1234')"
+            );
+
+            // Add sample trains
             stmt.executeUpdate(
                 "INSERT OR IGNORE INTO trains (train_number, train_name) " +
                 "VALUES (12621, 'Tamil Nadu Express')"
@@ -60,6 +64,7 @@ public class Database {
                 "INSERT OR IGNORE INTO trains (train_number, train_name) " +
                 "VALUES (12007, 'Shatabdi Express')"
             );
+
             System.out.println("Database and Tables Created Successfully!");
 
             con.close();
